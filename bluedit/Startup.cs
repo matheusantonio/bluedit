@@ -49,7 +49,6 @@ namespace bluedit
             services.AddSingleton<ReplyService>();
             services.AddSingleton<SubForumService>();
             services.AddSingleton<UpvoteService>();
-            services.AddSingleton<UserService>();
 
             services.AddIdentityMongoDbProvider<MongoUser, MongoRole>(
                 identityOptions => {

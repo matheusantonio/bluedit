@@ -22,7 +22,7 @@ namespace bluedit.Services
         public List<Upvote> Get() =>
             _upvotes.Find(upvote => true).ToList();
 
-        public Upvote Get(ObjectId userId, ObjectId postId) =>
+        public Upvote Get(string userId, string postId) =>
             _upvotes.Find<Upvote>(upvote => upvote.UserId == userId
                                         && upvote.PostId == postId).FirstOrDefault();
         
@@ -32,7 +32,7 @@ namespace bluedit.Services
             return upvote;
         }
 
-        public void Update(ObjectId userId, ObjectId postId, Upvote upvoteIn) =>
+        public void Update(string userId, string postId, Upvote upvoteIn) =>
             _upvotes.ReplaceOne(upvote => upvote.UserId == userId
                                         && upvote.PostId == postId, upvoteIn);
         

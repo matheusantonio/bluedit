@@ -9,13 +9,14 @@ namespace bluedit.Models.Entities{
         
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id {get; set;}
+        public string Id {get; set;}
 
-        public ObjectId AuthorId {get; set;}
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string AuthorId {get; set;}
 
         public string Content {get; set;}
 
-        public List<ObjectId> Replies {get; set;}
+        public List<string> Replies {get; set;}
 
         public DateTime Time {get; set;}
 

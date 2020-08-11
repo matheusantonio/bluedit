@@ -23,7 +23,6 @@ namespace bluedit.Controllers
         private readonly UserManager<MongoUser> _userManager;
         private readonly SignInManager<MongoUser> _signInManager;
         private readonly AppSettings _appSettings;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserController(
             UserManager<MongoUser> userManager,

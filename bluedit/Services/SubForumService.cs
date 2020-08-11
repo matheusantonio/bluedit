@@ -22,7 +22,7 @@ namespace bluedit.Services
         public List<SubForum> Get() =>
             _subForums.Find(subForum => true).ToList();
 
-        public SubForum Get(ObjectId id) =>
+        public SubForum Get(string id) =>
             _subForums.Find<SubForum>(subForum => subForum.Id == id).FirstOrDefault();
 
         public SubForum GetByName(string name) =>
@@ -34,13 +34,13 @@ namespace bluedit.Services
             return subForum;
         }
 
-        public void Update(ObjectId id, SubForum subForumIn) =>
+        public void Update(string id, SubForum subForumIn) =>
             _subForums.ReplaceOne(subForum => subForum.Id == id, subForumIn);
         
         public void Remove(SubForum subForumIn) =>
             _subForums.DeleteOne(subForum => subForum.Id == subForumIn.Id);
         
-        public void Remove(ObjectId id) =>
+        public void Remove(string id) =>
             _subForums.DeleteOne(subForum => subForum.Id == id);
     }
 }

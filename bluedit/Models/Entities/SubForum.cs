@@ -7,9 +7,10 @@ namespace bluedit.Models.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id {get; set;}
+        public string Id {get; set;}
 
-        public ObjectId creatorId {get; set;}
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string creatorId {get; set;}
 
         public string Name {get; set;}
 

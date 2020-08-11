@@ -10,7 +10,8 @@ namespace bluedit.Models.Entities
 
         public List<string> Tags {get; set;}
 
-        public ObjectId SubForumId {get; set;}
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string SubForumId {get; set;}
     }
     
 }

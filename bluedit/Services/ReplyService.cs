@@ -22,7 +22,7 @@ namespace bluedit.Services
         public List<Reply> Get() =>
             _replies.Find(reply => true).ToList();
         
-        public Reply Get(ObjectId id) =>
+        public Reply Get(string id) =>
             _replies.Find<Reply>(reply => reply.Id == id).FirstOrDefault();
 
         public Reply Create(Reply reply)
@@ -31,13 +31,13 @@ namespace bluedit.Services
             return reply;
         }
 
-        public void Update(ObjectId id, Reply replyIn) =>
+        public void Update(string id, Reply replyIn) =>
             _replies.ReplaceOne(reply => reply.Id == id, replyIn);
         
         public void Remove(Reply replyIn) =>
             _replies.DeleteOne(reply => reply.Id == replyIn.Id);
         
-        public void Remove(ObjectId id) =>
+        public void Remove(string id) =>
             _replies.DeleteOne(reply => reply.Id == id);
         
 
