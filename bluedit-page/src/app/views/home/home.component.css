@@ -1,0 +1,18 @@
+.home {
+    display: flex;
+    flex-direction: row;
+}
+
+.home .column {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.posts {
+    margin-top: 20px;
+}
+
+.post {
+    margin-top: 10px;
+}

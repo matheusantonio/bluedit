@@ -1,0 +1,5 @@
+.pageLayout {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: center;
+}
