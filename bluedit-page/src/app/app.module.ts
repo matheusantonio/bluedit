@@ -11,7 +11,9 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatCardModule } from '@angular/material/card';
 import { PostPreviewComponent } from './components/home/post-preview/post-preview.component';
 import { SubComponent } from './views/sub/sub.component';
-import { PostComponent } from './components/sub/post/post.component'
+import { PostComponent } from './components/sub/post/post.component';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { PostComponent } from './components/sub/post/post.component'
     HomeComponent,
     PostPreviewComponent,
     SubComponent,
-    PostComponent
+    PostComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
