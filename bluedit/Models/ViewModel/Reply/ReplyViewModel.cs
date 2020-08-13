@@ -1,18 +1,9 @@
-using bluedit.Models.ViewModel.Reply;
 using System.Collections.Generic;
 using System;
 
-namespace bluedit.Models.Entities
-{
-    public class PostViewModel
-    {
+namespace bluedit.Models.ViewModel.Reply{
+    public class ReplyViewModel {
         public string Id {get; set;}
-
-        public string Title {get; set;}
-
-        public List<string> Tags {get; set;}
-
-        public string SubForum {get; set;}
 
         public string Author {get; set;}
 
@@ -24,5 +15,4 @@ namespace bluedit.Models.Entities
 
         public int Upvotes {get; set;}
     }
-    
 }

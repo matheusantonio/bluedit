@@ -1,5 +1,6 @@
 using bluedit.Models.Entities;
 using bluedit.Models.ViewModel.Posts;
+using bluedit.Models.ViewModel.Reply;
 using bluedit.Services;
 
 using MongoDB.Bson;
@@ -63,7 +64,31 @@ namespace bluedit.Controllers
 
             return returnPosts;
         }
-            
+        
+        private async Task<List<ReplyViewModel>> ListReplies(List<string> replyIds)
+        {
+            var viewReplies = new List<ReplyViewModel>();
+
+            foreach(string id in replyIds)
+            {
+                var reply = _replyService.Get(id);
+                var author = await _userManager.FindByIdAsync(reply.AuthorId);
+                var replies = await ListReplies(reply.Replies);
+
+                viewReplies.Add(
+                    new ReplyViewModel
+                    {
+                        Id = reply.Id,
+                        Author = author.UserName,
+                        Content = reply.Content,
+                        Replies = replies,
+                        Time = reply.Time,
+                        Upvotes = reply.Upvotes
+                    });
+            }
+
+            return viewReplies;
+        }
         
         [HttpGet("{id:length(24)}", Name = "GetPost")]
         public async Task<ActionResult<PostViewModel>> Get(string id)
@@ -78,12 +103,7 @@ namespace bluedit.Controllers
             var subForum = _subForumService.Get(post.SubForumId);
             var author = await _userManager.FindByIdAsync(post.AuthorId);
 
-            var replies = new List<Reply>();
-
-            foreach(string replyId in post.Replies)
-            {
-                replies.Add(_replyService.Get(replyId));
-            }
+            var replies = await ListReplies(post.Replies);
 
             var posts = new PostViewModel
             {

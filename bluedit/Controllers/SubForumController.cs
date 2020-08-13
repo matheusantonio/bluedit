@@ -53,7 +53,7 @@ namespace bluedit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PostViewModel>>> GetByName([FromQuery]string name)
+        public async Task<ActionResult<List<PostPreviewViewModel>>> GetByName([FromQuery]string name)
         {
             if(name == null) return BadRequest();
 
@@ -61,29 +61,19 @@ namespace bluedit.Controllers
 
             var posts = _postsService.GetBySubForum(subForum.Id);
 
-            var returnPosts = new List<PostViewModel>();
+            var returnPosts = new List<PostPreviewViewModel>();
 
             foreach(Post post in posts)
             {
                 var author = await _userManager.FindByIdAsync(post.AuthorId);
 
-                var replies = new List<Reply>();
-
-                foreach(string replyId in post.Replies)
-                {
-                    replies.Add(_replyService.Get(replyId));
-                }
-
                 returnPosts.Add(
-                    new PostViewModel
+                    new PostPreviewViewModel
                     {
                         Id = post.Id,
                         Title = post.Title,
                         Tags = post.Tags,
-                        SubForum = subForum.Name,
                         Author = author.UserName,
-                        Content = post.Content,
-                        Replies = replies,
                         Time = post.Time,
                         Upvotes = post.Upvotes
                     }

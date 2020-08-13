@@ -13,7 +13,9 @@ import { PostPreviewComponent } from './components/home/post-preview/post-previe
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/sub/post/post.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component'
+import { RegisterComponent } from './views/register/register.component';
+import { ReplyComponent } from './components/post/reply/reply.component';
+import { PreviewComponent } from './components/post/preview/preview.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { RegisterComponent } from './views/register/register.component'
     SubComponent,
     PostComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ReplyComponent,
+    PreviewComponent
   ],
   imports: [
     BrowserModule,
