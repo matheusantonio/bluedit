@@ -38,34 +38,23 @@ namespace bluedit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PostViewModel>>> Get()
+        public async Task<ActionResult<List<PostPreviewViewModel>>> Get()
         {
             var posts = _postsService.Get();
 
-            var returnPosts = new List<PostViewModel>();
+            var returnPosts = new List<PostPreviewViewModel>();
 
             foreach(Post post in posts)
             {
                 var author = await _userManager.FindByIdAsync(post.AuthorId);
-                var subForum = _subForumService.Get(post.SubForumId);
-
-                var replies = new List<Reply>();
-
-                foreach(string replyId in post.Replies)
-                {
-                    replies.Add(_replyService.Get(replyId));
-                }
 
                 returnPosts.Add(
-                    new PostViewModel
+                    new PostPreviewViewModel
                     {
                         Id = post.Id,
                         Title = post.Title,
                         Tags = post.Tags,
-                        SubForum = subForum.Name,
                         Author = author.UserName,
-                        Content = post.Content,
-                        Replies = replies,
                         Time = post.Time,
                         Upvotes = post.Upvotes
                     }
@@ -77,7 +66,7 @@ namespace bluedit.Controllers
             
         
         [HttpGet("{id:length(24)}", Name = "GetPost")]
-        public ActionResult<Post> Get(string id)
+        public async Task<ActionResult<PostViewModel>> Get(string id)
         {
             var post = _postsService.Get(id);
 
@@ -86,7 +75,30 @@ namespace bluedit.Controllers
                 return NotFound();
             }
 
-            return post;
+            var subForum = _subForumService.Get(post.SubForumId);
+            var author = await _userManager.FindByIdAsync(post.AuthorId);
+
+            var replies = new List<Reply>();
+
+            foreach(string replyId in post.Replies)
+            {
+                replies.Add(_replyService.Get(replyId));
+            }
+
+            var posts = new PostViewModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Tags = post.Tags,
+                SubForum = subForum.Name,
+                Author = author.UserName,
+                Content = post.Content,
+                Replies = replies,
+                Time = post.Time,
+                Upvotes = post.Upvotes
+            };
+
+            return posts;
         }
 
         [Authorize]

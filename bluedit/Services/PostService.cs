@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace bluedit.Services
 {
@@ -20,13 +21,23 @@ namespace bluedit.Services
         }
 
         public List<Post> Get() =>
-            _posts.Find(post => true).ToList();
+            _posts.Find(post => true).SortByDescending(post => post.Time) .ToList();
 
         public Post Get(string id) =>
             _posts.Find<Post>(post => post.Id == id).FirstOrDefault();
 
         public List<Post> GetBySubForum(string subForumId) =>
             _posts.Find<Post>(post => post.SubForumId == subForumId).ToList();
+
+        public IEnumerable<string> GetTopSubForums() =>
+             _posts.Aggregate()
+                .Group(post => new { subForumGroup = post.SubForumId },
+                       g => new {id = g.Key, count = g.Count()})
+                .SortByDescending(r => r.count)
+                .Project(r => new {value = r.id.subForumGroup })
+                .ToEnumerable()
+                .Select(x => x.value.ToString());
+            
 
         public Post Create(Post post)
         {

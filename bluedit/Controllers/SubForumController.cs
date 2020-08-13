@@ -13,10 +13,11 @@ using MongoDB.Bson;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace bluedit.Controllers
 {
-    [Route("bluedit/b")]
+    [Route("bluedit/[controller]")]
     [ApiController]
     public class SubForumController : ControllerBase
     {
@@ -38,7 +39,7 @@ namespace bluedit.Controllers
             _userManager = userManager;
         }
 
-        /* [HttpGet("{id:length(24)}", Name = "GetSubForum")]
+        [HttpGet("{id:length(24)}", Name = "GetSubForum")]
         public ActionResult<SubForum> Get(string id)
         {
             var subForum = _subForumService.Get(id);
@@ -49,12 +50,14 @@ namespace bluedit.Controllers
             }
 
             return subForum;
-        } */
+        }
 
-        [HttpGet("{subForumName:length(24)}")]
-        public async Task<ActionResult<List<PostViewModel>>> GetByName(string subForumName)
+        [HttpGet]
+        public async Task<ActionResult<List<PostViewModel>>> GetByName([FromQuery]string name)
         {
-            var subForum = _subForumService.GetByName(subForumName);
+            if(name == null) return BadRequest();
+
+            var subForum = _subForumService.GetByName(name);
 
             var posts = _postsService.GetBySubForum(subForum.Id);
 
@@ -90,6 +93,20 @@ namespace bluedit.Controllers
             return returnPosts;
         }
 
+        [HttpGet("top")]
+        public ActionResult<List<string>> TopSubForums()
+        {
+            return _postsService.GetTopSubForums()
+                    .Select((subId) => 
+                        {
+                            var subForum = _subForumService.Get(subId);
+                            if(subForum == null) return "";
+                            return subForum.Name;
+                        })
+                    .ToList();
+        }
+
+
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<SubForum>> Create([FromBody] CreateSubForumViewModel createSubForum)
@@ -106,7 +123,7 @@ namespace bluedit.Controllers
 
             _subForumService.Create(subForum);
 
-            return CreatedAtRoute("GetSubForum", new {id = subForum.Id.ToString()}, subForum);
+            return CreatedAtRoute("GetSubForum", new {id = subForum.Id}, subForum);
         }
     }
 }
