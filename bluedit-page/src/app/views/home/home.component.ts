@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'
+import { PostPreview } from '../../models/post.preview.model'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  posts : PostPreview[]
+
+  constructor(private postService : PostService) { }
 
   ngOnInit(): void {
+    this.postService.readPosts().subscribe(posts => {
+      
+      this.posts = posts
+    })
   }
 
 }

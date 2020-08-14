@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PostPreview } from '../post.preview.model'
+import { Component, OnInit, Input } from '@angular/core';
+import { PostPreview } from '../../../models/post.preview.model'
 
 @Component({
   selector: 'app-preview',
@@ -8,7 +8,7 @@ import { PostPreview } from '../post.preview.model'
 })
 export class PreviewComponent implements OnInit {
 
-  post : PostPreview
+  @Input() post : PostPreview
 
   constructor() { }
 

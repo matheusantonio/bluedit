@@ -8,18 +8,10 @@
         </mat-card>
 
         <div class="posts">
+            <div *ngFor="let post of posts">
+                <app-preview [post]="post"></app-preview>
+            </div>
             
-            <div  class="post">
-                <app-post-preview title="Post 1" content="Post 1 Content"></app-post-preview>
-            </div>
-
-            <div  class="post">
-                <app-post-preview title="Post 2" content="Post 2 Content"></app-post-preview>
-            </div>
-
-            <div  class="post">
-                <app-post-preview  title="Post 3" content="Post 3 Content"></app-post-preview>
-            </div>
             
         </div>
     </div>
