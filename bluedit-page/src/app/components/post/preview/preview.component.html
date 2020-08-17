@@ -1,5 +1,7 @@
 <mat-card>
-    <mat-card-title>{{post.upvotes}} : {{ post.title }}</mat-card-title>
+    <a routerLink="b/post/{{post.id}}">
+        <mat-card-title>{{post.upvotes}} : {{ post.title }}</mat-card-title>
+    </a>
     <mat-card-subtitle>{{ post.author }} : {{post.time}}</mat-card-subtitle>
     <mat-card-footer> {{ post.tags }} </mat-card-footer>
 </mat-card>

@@ -10,9 +10,9 @@ import { HomeComponent } from './views/home/home.component';
 import { HttpClientModule } from '@angular/common/http'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatCardModule } from '@angular/material/card';
-import { PostPreviewComponent } from './components/home/post-preview/post-preview.component';
 import { SubComponent } from './views/sub/sub.component';
-import { PostComponent } from './components/sub/post/post.component';
+import { PostComponent } from './components/post/post/post.component'
+import { PostViewComponent } from './views/post/post.component'
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ReplyComponent } from './components/post/reply/reply.component';
@@ -23,13 +23,13 @@ import { PreviewComponent } from './components/post/preview/preview.component'
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    PostPreviewComponent,
     SubComponent,
     PostComponent,
     LoginComponent,
     RegisterComponent,
     ReplyComponent,
-    PreviewComponent
+    PreviewComponent,
+    PostViewComponent
   ],
   imports: [
     BrowserModule,

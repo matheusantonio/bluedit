@@ -101,7 +101,16 @@ namespace bluedit.Controllers
             }
 
             var subForum = _subForumService.Get(post.SubForumId);
+            
+
             var author = await _userManager.FindByIdAsync(post.AuthorId);
+
+            if(subForum == null)
+            {
+                subForum = new SubForum{
+                    Name = author.UserName
+                };
+            }
 
             var replies = await ListReplies(post.Replies);
 
