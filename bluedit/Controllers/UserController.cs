@@ -52,7 +52,10 @@ namespace bluedit.Controllers
 
             await _signInManager.SignInAsync(user, false);
 
-            return Ok(await GenerateJwt(registerUser.UserName));
+            return Ok(new {
+                token = await GenerateJwt(registerUser.UserName),
+                user = registerUser.UserName
+            });
         }
 
         [HttpPost("Login")]
@@ -64,7 +67,10 @@ namespace bluedit.Controllers
 
             if(result.Succeeded)
             {
-                return Ok(await GenerateJwt(loginUser.UserName));
+                return Ok(new {
+                    token = await GenerateJwt(loginUser.UserName),
+                    user = loginUser.UserName
+                });
             }
 
             return BadRequest("Usuário ou senha inválidos");
