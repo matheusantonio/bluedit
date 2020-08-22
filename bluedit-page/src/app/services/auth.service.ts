@@ -13,21 +13,14 @@ export class AuthService {
   constructor(private http : HttpClient) { }
 
 
-  login(username : string, password : string) : void {
+  login(username : string, password : string) : Observable<AuthResponse> {
 
     const url = this.baseUrl + '/user/login'
 
-    this.http.post<AuthResponse>(url, {
+    return this.http.post<AuthResponse>(url, {
       "UserName" : username,
       "Password" : password
-    }).subscribe( response => {
-      console.log(response)
-      localStorage.setItem('app-token', response.token)
-      localStorage.setItem('app-user', response.user)
-    }, error => {
-      console.log(error)
     })
-
   }
 
 

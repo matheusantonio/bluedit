@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './views/home/home.component'
 import { SubComponent } from './views/sub/sub.component'
-import { LoginComponent } from './views/login/login.component'
-import { RegisterComponent } from './views/register/register.component'
+import { LoginViewComponent } from './views/login/login.component'
+import { RegisterViewComponent } from './views/register/register.component'
 import { PostViewComponent } from './views/post/post.component';
 
 const routes: Routes = [
@@ -22,11 +22,11 @@ const routes: Routes = [
   },
   {
     path : "login",
-    component: LoginComponent
+    component: LoginViewComponent
   },
   {
     path: "register",
-    component: RegisterComponent
+    component: RegisterViewComponent
   }
 ];
 

@@ -8,15 +8,23 @@ import { HeaderComponent } from './components/template/header/header.component';
 import { HomeComponent } from './views/home/home.component';
 
 import { HttpClientModule } from '@angular/common/http'
+
+import { FormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/post/post/post.component'
 import { PostViewComponent } from './views/post/post.component'
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { LoginViewComponent } from './views/login/login.component';
+import { RegisterViewComponent } from './views/register/register.component';
 import { ReplyComponent } from './components/post/reply/reply.component';
-import { PreviewComponent } from './components/post/preview/preview.component'
+import { PreviewComponent } from './components/post/preview/preview.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component'
 
 @NgModule({
   declarations: [
@@ -25,11 +33,13 @@ import { PreviewComponent } from './components/post/preview/preview.component'
     HomeComponent,
     SubComponent,
     PostComponent,
-    LoginComponent,
-    RegisterComponent,
+    LoginViewComponent,
+    RegisterViewComponent,
     ReplyComponent,
     PreviewComponent,
-    PostViewComponent
+    PostViewComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +47,11 @@ import { PreviewComponent } from './components/post/preview/preview.component'
     BrowserAnimationsModule,
     MatToolbarModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
