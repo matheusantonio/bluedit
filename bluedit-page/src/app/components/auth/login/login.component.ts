@@ -29,17 +29,15 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.loginUser.username, this.loginUser.password)
       .subscribe( response => {
-        console.log(response)
         localStorage.setItem('app-token', response.token)
         localStorage.setItem('app-user', response.user)
         this.router.navigate([''])
         this.messageService.showMessage('Login realizado com sucesso!')
       }, error => {
         console.log(error)
-        this.messageService.showMessage('Usuário ou senha inválidos')
-        
+        error.error.forEach(element => {
+          this.messageService.showMessage(element.description)
+        });
       })
-
     }
-
 }

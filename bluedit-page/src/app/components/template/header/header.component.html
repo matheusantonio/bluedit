@@ -20,19 +20,39 @@
 
     <span>
 
-        <a routerLink="login">
-            <i class="material-icons">
-                login
-            </i>
-            Login
-        </a>
+        <div *ngIf="currentUser" >
 
-        <a routerLink="register">
-            <i class="material-icons">
-                person_add
-            </i>
-            Register
-        </a>
+            Welcome, {{currentUser}}
+
+            <a (click)="logout()" >
+                <i class="material-icons">
+                    exit_to_app
+                </i>
+                Logout
+            </a>
+        </div>
+        
+        <div *ngIf="currentUser == null">
+            <a routerLink="login">
+                <i class="material-icons">
+                    login
+                </i>
+                Login
+            </a>
+    
+            <a routerLink="register">
+                <i class="material-icons">
+                    person_add
+                </i>
+                Register
+            </a>
+
+
+        </div>
+
+        
+
+        
 
     </span>
     

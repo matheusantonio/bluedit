@@ -51,7 +51,7 @@ import { RegisterComponent } from './components/auth/register/register.component
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

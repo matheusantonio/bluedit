@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace bluedit.Models.Entities
+namespace bluedit.Models.ViewModel.Posts
 {
     public class PostPreviewViewModel
     {

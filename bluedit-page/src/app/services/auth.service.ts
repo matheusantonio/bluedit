@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { AuthResponse } from '../models/auth.model'
+import { AuthResponse, CurrentUser } from '../models/auth.model'
 
 @Injectable({
   providedIn: 'root'
@@ -23,18 +23,26 @@ export class AuthService {
     })
   }
 
+  register(username : string, password : string, email : string) : Observable<AuthResponse> {
+    const url = this.baseUrl + '/user/register'
+
+    return this.http.post<AuthResponse>(url, {
+      "UserName" : username,
+      "Password" : password,
+      "Email" : email
+    })
+  }
 
   logout() : void {
     localStorage.removeItem('app-token')
+    localStorage.removeItem('app-user')
   }
 
 
-  currentUser() : void {
+  currentUser() : Observable<CurrentUser> {
     const url = this.baseUrl + '/user/current'
 
-    this.http.get(url, this.getAuthorizationHeader()).subscribe(response => {
-      console.log(response)
-    })
+    return this.http.get<CurrentUser>(url, this.getAuthorizationHeader())
   }
 
 

@@ -73,7 +73,15 @@ namespace bluedit.Controllers
                 });
             }
 
-            return BadRequest("Usuário ou senha inválidos");
+            return BadRequest(
+                new[] 
+                {
+                    new 
+                    {
+                        code = "InvalidCredentials",
+                        description = "Invalid username or password"
+                    }
+                });
 
         }
 

@@ -1,5 +1,6 @@
 using bluedit.Models.Entities;
 using bluedit.Models.ViewModel.SubForum;
+using bluedit.Models.ViewModel.Posts;
 using bluedit.Services;
 
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,7 @@ namespace bluedit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<PostPreviewViewModel>>> GetByName([FromQuery]string name)
+        public async Task<ActionResult<SubForumHomeViewModel>> GetByName([FromQuery]string name)
         {
             if(name == null) return BadRequest();
 
@@ -80,7 +81,12 @@ namespace bluedit.Controllers
                 );
             }
 
-            return returnPosts;
+            return new SubForumHomeViewModel{
+                Name = subForum.Name,
+                Description = subForum.Descrition,
+                posts = returnPosts,
+                Id = subForum.Id
+            };
         }
 
         [HttpGet("top")]

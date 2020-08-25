@@ -8,25 +8,18 @@
         </mat-card>
 
         <div class="posts">
+            <div *ngFor="let post of subForum.posts">
+                <app-preview [post]="post"></app-preview>
+            </div>
             
         </div>
     </div>
 
     <div class="column">
         <mat-card>
-            <mat-card-title>Top Subreddits</mat-card-title>
+            <mat-card-title>Welcome to {{subForum.name}}</mat-card-title>
             <mat-card-content>
-                <ul>
-                    <li>
-                        1
-                    </li>
-                    <li>
-                        2
-                    </li>
-                    <li>
-                        3
-                    </li>
-                </ul>
+                {{subForum.description}}
             </mat-card-content>
         </mat-card>
 

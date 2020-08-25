@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { PostPreview } from '../models/post.preview.model'
 import { Post } from '../models/post.model'
+import { SubForum } from '../models/subforum.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,17 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  readPosts(subforum: string = null) : Observable<PostPreview[]> {
+  readPosts() : Observable<PostPreview[]> {
     
-    var url = ''
-
-    if(subforum != null) {
-      url = this.baseUrl + '/subforum?name=' + subforum
-    } else {
-      url = this.baseUrl + '/posts'
-    }
+    const url = this.baseUrl + '/posts'
     
     return this.http.get<PostPreview[]>(url)
+  }
+
+  readSubForum(subforum : string) : Observable<SubForum> {
+    const url = this.baseUrl + '/subforum?name=' + subforum
+
+    return this.http.get<SubForum>(url)
   }
 
   postById(id : string) : Observable<Post> {
