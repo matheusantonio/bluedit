@@ -138,11 +138,18 @@ namespace bluedit.Controllers
                 HttpContext.User.FindFirstValue("username")
             );
 
-            var subForum = _subForumService.GetByName(createPost.SubForum);
+            string subForumId = null;
 
-            if(subForum == null)
+            if(createPost.SubForum != null)
             {
-                return NotFound(createPost.SubForum);
+                var subForum = _subForumService.GetByName(createPost.SubForum);
+
+                if(subForum == null)
+                {
+                    return NotFound(createPost.SubForum);
+                }
+
+                subForumId = subForum.Id;
             }
 
             var post = new Post
@@ -151,12 +158,11 @@ namespace bluedit.Controllers
                 Content = createPost.Content,
                 Tags = createPost.Tags,
                 AuthorId = author.Id.ToString(),
-                SubForumId = subForum.Id,
+                SubForumId = subForumId,
                 Replies = new List<string>(),
                 Upvotes = 1,
                 Time = DateTime.Now
             };
-
 
             _postsService.Create(post);
 

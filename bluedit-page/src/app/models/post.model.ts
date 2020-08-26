@@ -11,3 +11,8 @@ export interface Post{
     time : Date
     upvotes : number
 }
+
+export interface CreatePost {
+    title : string
+    content : string
+}

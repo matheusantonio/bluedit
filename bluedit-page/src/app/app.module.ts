@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatButtonModule } from '@angular/material/button'
 
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/post/post/post.component'
@@ -24,7 +25,8 @@ import { RegisterViewComponent } from './views/register/register.component';
 import { ReplyComponent } from './components/post/reply/reply.component';
 import { PreviewComponent } from './components/post/preview/preview.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component'
+import { RegisterComponent } from './components/auth/register/register.component';
+import { CreateComponent } from './components/post/create/create.component'
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { RegisterComponent } from './components/auth/register/register.component
     PreviewComponent,
     PostViewComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { RegisterComponent } from './components/auth/register/register.component
     MatInputModule,
     MatSnackBarModule,
     FormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

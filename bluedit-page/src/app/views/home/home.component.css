@@ -3,8 +3,22 @@
     flex-direction: row;
 }
 
-.home .column {
-    padding: 10px 10px;
+.home .posts-column {
+    min-width: 500px;
+    max-width: 1000px;
+
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.home .side-column {
+    min-width: 300px;
+    max-width: 500px;
+
+    padding: 10px;
+
     display: flex;
     flex-direction: column;
 }

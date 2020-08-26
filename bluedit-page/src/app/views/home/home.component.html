@@ -1,22 +1,16 @@
 <div class="home">
-    <div class="column">
-        <mat-card>
-            <mat-card-title>Create New Post</mat-card-title>
-            <mat-card-content>
-                <textarea> </textarea>
-            </mat-card-content>
-        </mat-card>
+    <div class="posts-column">
+        <app-create></app-create>
 
         <div class="posts">
             <div *ngFor="let post of posts">
                 <app-preview [post]="post"></app-preview>
             </div>
             
-            
         </div>
     </div>
 
-    <div class="column">
+    <div class="side-column">
         <mat-card>
             <mat-card-title>Top Subreddits</mat-card-title>
             <mat-card-content>

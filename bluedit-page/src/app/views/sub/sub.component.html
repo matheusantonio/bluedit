@@ -1,11 +1,7 @@
 <div class="home">
-    <div class="column">
-        <mat-card>
-            <mat-card-title>Create Post</mat-card-title>
-            <mat-card-content>
-                <textarea> </textarea>
-            </mat-card-content>
-        </mat-card>
+
+    <div class="posts-column">
+        <app-create [subForumName]="subForum.name"></app-create>
 
         <div class="posts">
             <div *ngFor="let post of subForum.posts">
@@ -15,7 +11,7 @@
         </div>
     </div>
 
-    <div class="column">
+    <div class="info-column">
         <mat-card>
             <mat-card-title>Welcome to {{subForum.name}}</mat-card-title>
             <mat-card-content>
@@ -24,4 +20,5 @@
         </mat-card>
 
     </div>
+    
 </div>

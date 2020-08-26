@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PostPreview } from '../models/post.preview.model'
 import { Post } from '../models/post.model'
 import { SubForum } from '../models/subforum.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class PostService {
 
   baseUrl = "https://localhost:5002/bluedit"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private authService : AuthService) { }
 
   readPosts() : Observable<PostPreview[]> {
     
@@ -40,6 +42,16 @@ export class PostService {
     return this.http.get<string[]>(url)
   }
 
+  createPost(title : string, content : string, subForum : string = null) : Observable<Post> {
 
+    const url = this.baseUrl + '/posts'
+
+    return this.http.post<Post>(url, {
+      title: title,
+      content : content,
+      subForum : subForum
+    }, this.authService.getAuthorizationHeader())
+
+  }
 
 }

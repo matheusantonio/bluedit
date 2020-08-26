@@ -1,8 +1,8 @@
-<mat-card>
+<mat-card class="register-card">
 
     <mat-card-title>Register</mat-card-title>
 
-    <form (ngSubmit)="requestRegister()">
+    <form (ngSubmit)="requestRegister()" class="register-form">
         <mat-form-field>
             <input matInput placeholder="Username" [(ngModel)]="registerUser.username" name="username"/>
         </mat-form-field>
@@ -23,7 +23,7 @@
             <input matInput type="password" placeholder="Confirm Password" [(ngModel)]="registerUser.passwordConfirmation" name="passwordConfirmation" />
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" >Register</button>
+        <button mat-raised-button type="submit" color="primary">Register</button>
     </form>
 
 </mat-card>
