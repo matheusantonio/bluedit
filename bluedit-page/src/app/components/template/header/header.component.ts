@@ -9,24 +9,38 @@ import { AuthService } from '../../../services/auth.service'
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser : string = null
+  currentUser : string
 
-  constructor(private authService : AuthService) { }
+  constructor(private authService : AuthService) {
+    
+  }
 
   ngOnInit(): void {
-    
-    this.authService.currentUser().subscribe(response => {
-      this.currentUser = response.username
-    }, error => {
-      this.currentUser = null
-    })
 
-    
+    this.checkCurrentUser()
+
+    this.authService.loged$.subscribe(loged => {
+      if(loged && this.currentUser == null){
+        console.log("Usuário logado")
+        this.checkCurrentUser()
+      } else {
+        console.log("Usuário deslogado")
+        this.currentUser=null
+      }
+    })
+  }
+
+  checkCurrentUser() {
+    this.authService.currentUser().subscribe(response => {
+      this.currentUser = response.userName
+    }, error => {
+      this.authService.loged$.next(false)
+      console.log(error)
+    })
   }
 
   logout() {
     this.authService.logout()
-    this.currentUser = null
   }
 
 }

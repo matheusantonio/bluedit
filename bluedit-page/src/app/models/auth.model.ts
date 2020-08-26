@@ -4,6 +4,6 @@ export interface AuthResponse {
 }
 
 export interface CurrentUser {
-    username : string
+    userName : string
     email : string
 }

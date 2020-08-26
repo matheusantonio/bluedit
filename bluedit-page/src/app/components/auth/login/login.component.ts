@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('app-user', response.user)
         this.router.navigate([''])
         this.messageService.showMessage('Login realizado com sucesso!')
+
+        this.authService.loged$.next(true)
+
       }, error => {
         console.log(error)
         error.error.forEach(element => {
