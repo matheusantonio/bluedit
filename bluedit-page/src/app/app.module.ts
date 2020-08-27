@@ -16,6 +16,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatButtonModule } from '@angular/material/button'
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/post/post/post.component'
@@ -55,7 +57,9 @@ import { CreateComponent } from './components/post/create/create.component'
     MatInputModule,
     MatSnackBarModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatChipsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

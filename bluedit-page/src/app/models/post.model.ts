@@ -15,4 +15,5 @@ export interface Post{
 export interface CreatePost {
     title : string
     content : string
+    tags : string[]
 }

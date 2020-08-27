@@ -20,7 +20,6 @@ export class PostViewComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id")
     this.postService.postById(id).subscribe(post => {
-      console.log(post)
       this.post = post
     })
   }

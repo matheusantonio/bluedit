@@ -19,6 +19,7 @@ export class SubComponent implements OnInit {
     const subForumName = this.route.snapshot.paramMap.get('name')
     this.postService.readSubForum(subForumName).subscribe(response => {
       this.subForum = response
+      console.log(this.subForum)
     }, error => {
       console.log(error)
     })

@@ -42,14 +42,15 @@ export class PostService {
     return this.http.get<string[]>(url)
   }
 
-  createPost(title : string, content : string, subForum : string = null) : Observable<Post> {
+  createPost(title : string, content : string, tags : string[], subForum : string = null) : Observable<Post> {
 
     const url = this.baseUrl + '/posts'
 
     return this.http.post<Post>(url, {
       title: title,
       content : content,
-      subForum : subForum
+      subForum : subForum,
+      tags : tags
     }, this.authService.getAuthorizationHeader())
 
   }

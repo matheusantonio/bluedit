@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { CreatePost } from 'src/app/models/post.model';
 import { MessageService } from 'src/app/services/message.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-create',
@@ -11,10 +13,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   @Input() subForumName : string = null
   post : CreatePost = {
     title : "",
-    content : ""
+    content : "",
+    tags : []
   }
 
   constructor(private postService : PostService,
@@ -25,7 +33,7 @@ export class CreateComponent implements OnInit {
   }
 
   createPost() {
-    this.postService.createPost(this.post.title, this.post.content, this.subForumName).subscribe(response => {
+    this.postService.createPost(this.post.title, this.post.content, this.post.tags, this.subForumName).subscribe(response => {
       console.log(response)
       this.messageService.showMessage("Post criado com sucesso!")
       
@@ -35,6 +43,27 @@ export class CreateComponent implements OnInit {
       console.log(error)
       this.messageService.showMessage(error.message)
     })
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.post.tags.push(value.trim());
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(tag: string): void {
+    const index = this.post.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.post.tags.splice(index, 1);
+    }
   }
 
 }
