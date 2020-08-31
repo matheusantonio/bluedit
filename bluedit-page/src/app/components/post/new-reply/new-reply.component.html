@@ -1,5 +1,5 @@
 <div>
-    <mat-card class="card" *ngIf="currentUser">
+    <mat-card class="card" *ngIf="currentUser" (ngSubmit)="createReply()">
 
         <mat-card-subtitle>Reply as {{currentUser}}</mat-card-subtitle>
         
@@ -7,10 +7,10 @@
     
             <mat-card-content class="form-content">
     
-                <mat-form-field>
+                <mat-form-field appearance="outline">
     
                     <mat-label>Content</mat-label>
-                    <textarea matInput rows="5" name="content" > </textarea>
+                    <textarea matInput rows="5" name="content" [(ngModel)]="replyContent" > </textarea>
     
                 </mat-form-field>
     
@@ -18,7 +18,7 @@
     
             <mat-card-actions>
     
-                <button mat-raised-button type="submit" color="primary">Reply</button>
+                <button mat-raised-button type="submit" (click)="createReply()" color="primary">Reply</button>
                 
             </mat-card-actions>
     

@@ -1,23 +1,23 @@
 <mat-card>
     <mat-card-title>Create Post</mat-card-title>
 
-    <form class="create-form" (ngSubmit)="createPost()">
+    <form class="create-form" *ngIf="currentUser" (ngSubmit)="createPost()">
 
         <mat-card-content class="form-content">
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Title</mat-label>
                 <input matInput name="title" [(ngModel)]="post.title"/>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
 
                 <mat-label>Content</mat-label>
-                <textarea matInput rows="10" name="content" [(ngModel)]="post.content"> </textarea>
+                <textarea matInput rows="7" name="content" [(ngModel)]="post.content"> </textarea>
 
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 
                 <mat-label>Tags</mat-label>
                 <mat-chip-list #chipList aria-label="Fruit selection">
@@ -49,4 +49,7 @@
         </mat-card-footer>
 
     </form>
+
+    <div *ngIf="currentUser == null">Log in or Register to create a post</div>
+
 </mat-card>

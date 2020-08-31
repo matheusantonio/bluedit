@@ -14,5 +14,6 @@ namespace bluedit.Models.ViewModel.Reply{
         public DateTime Time {get; set;}
 
         public int Upvotes {get; set;}
+        public bool? UserVote {get; set;}
     }
 }

@@ -22,9 +22,12 @@ namespace bluedit.Services
         public List<Upvote> Get() =>
             _upvotes.Find(upvote => true).ToList();
 
-        public Upvote Get(string userId, string postId) =>
-            _upvotes.Find<Upvote>(upvote => upvote.UserId == userId
-                                        && upvote.PostId == postId).FirstOrDefault();
+        public Upvote Get(string Id) =>
+            _upvotes.Find<Upvote>(upvote => upvote.Id == Id).FirstOrDefault();
+
+        public Upvote GetByPostAndUser(string UserId, string PostId) =>
+            _upvotes.Find<Upvote>(upvote => upvote.UserId == UserId &&
+                                            upvote.PostId == PostId).FirstOrDefault();
         
         public Upvote Create(Upvote upvote)
         {
@@ -32,12 +35,10 @@ namespace bluedit.Services
             return upvote;
         }
 
-        public void Update(string userId, string postId, Upvote upvoteIn) =>
-            _upvotes.ReplaceOne(upvote => upvote.UserId == userId
-                                        && upvote.PostId == postId, upvoteIn);
+        public void Update(string Id, Upvote upvoteIn) =>
+            _upvotes.ReplaceOne(upvote => upvote.Id == Id, upvoteIn);
         
         public void Remove(Upvote upvoteIn) =>
-            _upvotes.DeleteOne(upvote => upvote.UserId == upvoteIn.UserId
-                                && upvote.PostId == upvoteIn.PostId);
+            _upvotes.DeleteOne(upvote => upvote.Id == upvoteIn.Id);
     }
 }

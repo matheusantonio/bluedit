@@ -5,6 +5,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { Router } from '@angular/router';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create',
@@ -25,11 +26,29 @@ export class CreateComponent implements OnInit {
     tags : []
   }
 
+  currentUser : string = null
+
   constructor(private postService : PostService,
               private messageService : MessageService,
+              private authService : AuthService,
               private router : Router) { }
 
   ngOnInit(): void {
+    
+    this.setUser()
+
+    this.authService.loged$.subscribe(value => {
+      this.setUser()
+    })
+
+  }
+
+  setUser() {
+    this.authService.currentUser().subscribe(user => {
+      this.currentUser = user.userName
+    }, error => {
+      this.currentUser = null
+    })
   }
 
   createPost() {

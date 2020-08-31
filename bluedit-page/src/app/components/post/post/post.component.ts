@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '../../../models/post.model';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -10,10 +11,20 @@ export class PostComponent implements OnInit {
 
   @Input() post : Post
 
-  constructor() { }
+  constructor(private postService : PostService) { }
 
   ngOnInit(): void {
     
+  }
+
+  upvote(isUp : boolean)
+  {
+    this.postService.upvote(this.post.id, isUp, true).subscribe(() => {
+      if(isUp) this.post.upvotes++
+      else this.post.upvotes--
+    }, error => {
+      console.log(error)
+    })
   }
 
 }

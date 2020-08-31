@@ -1,1 +1,45 @@
-<p>reply works!</p>
+<mat-card class="reply">
+
+    <span class="reply-content">
+
+        <mat-card-title>
+            <span class="upvotes">
+
+                <button mat-icon-button>
+                    <mat-icon>
+                        keyboard_arrow_up
+                    </mat-icon>
+                </button>
+                
+                {{reply.upvotes}}
+
+                <button mat-icon-button>
+                    <mat-icon>
+                        keyboard_arrow_down
+                    </mat-icon>
+                </button>
+
+            </span>
+
+        </mat-card-title>
+
+        
+        <span class="content">
+
+            <mat-card-subtitle>Posted by {{ reply.author }} at {{reply.time}}</mat-card-subtitle>
+
+            <mat-card-content>{{ reply.content }}</mat-card-content>
+
+            <mat-card-actions>
+                <button mat-raised-button (click)="toggleReplyForm()">Reply</button>
+            </mat-card-actions>
+
+        </span>
+
+    </span>
+
+    <app-new-reply *ngIf="replyOpen" [replyId]="reply.id" [postId]="postId" class="reply-container"></app-new-reply>
+    
+    <app-reply *ngFor="let reply of reply.replies" [reply]="reply" [postId]="postId" class="reply-container"></app-reply>
+
+</mat-card>

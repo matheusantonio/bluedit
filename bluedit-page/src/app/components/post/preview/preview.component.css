@@ -1,5 +1,7 @@
 .preview {
     margin: 10px 5px 0px 0px;
+    display: flex;
+    flex-direction: row;
 }
 
 .upvotes {
@@ -8,17 +10,19 @@
 
     align-items: center;
 
-    padding-right: 10px;
+    padding-right: 15px;
 }
 
 .title {
     display: flex;
-    flex-direction: row;
-
-    align-items: center;
+    flex-direction: column;
 }
 
 .footer {
-    padding: 5px;
-    margin-left: 3px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+mat-chip {
+    margin: 0px 7px 5px 0px;
 }

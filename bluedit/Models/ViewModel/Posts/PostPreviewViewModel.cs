@@ -16,6 +16,8 @@ namespace bluedit.Models.ViewModel.Posts
         public DateTime Time {get; set;}
 
         public int Upvotes {get; set;}
+
+        public bool? UserVote {get; set;}
     }
     
 }

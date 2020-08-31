@@ -1,0 +1,19 @@
+.upvotes {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-right: 10px;
+}
+
+.reply-content {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+mat-card-actions {
+    justify-items: right;
+}

@@ -18,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/post/post/post.component'
@@ -61,7 +62,8 @@ import { NewReplyComponent } from './components/post/new-reply/new-reply.compone
     FormsModule,
     MatButtonModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

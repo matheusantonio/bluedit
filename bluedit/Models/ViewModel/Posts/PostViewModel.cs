@@ -23,6 +23,8 @@ namespace bluedit.Models.Entities
         public DateTime Time {get; set;}
 
         public int Upvotes {get; set;}
+
+        public bool? UserVote {get; set;}
     }
     
 }

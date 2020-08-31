@@ -5,6 +5,7 @@ import { PostPreview } from '../models/post.preview.model'
 import { Post } from '../models/post.model'
 import { SubForum } from '../models/subforum.model';
 import { AuthService } from './auth.service';
+import { Reply } from '../models/reply.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,29 @@ export class PostService {
       tags : tags
     }, this.authService.getAuthorizationHeader())
 
+  }
+
+  createReply(content : string, postId : string = null, replyId : string = null) : Observable<Reply> {
+
+    const url = this.baseUrl + '/posts/reply'
+
+    return this.http.post<Reply>(url, {
+      content : content,
+      postId : postId,
+      replyId : replyId
+    }, this.authService.getAuthorizationHeader())
+
+  }
+
+  upvote(postId : string, isUp : boolean, isReply : boolean = false) : Observable<any> {
+
+    const url = this.baseUrl + '/posts/upvotes'
+
+    return this.http.post<any>(url, {
+      postId : postId,
+      isUp : isUp,
+      isReply : isReply
+    }, this.authService.getAuthorizationHeader())
   }
 
 }

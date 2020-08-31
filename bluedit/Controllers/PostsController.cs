@@ -25,16 +25,19 @@ namespace bluedit.Controllers
         private readonly PostService _postsService;
         private readonly SubForumService _subForumService;
         private readonly ReplyService _replyService;
+        private readonly UpvoteService _upvoteService;
         private readonly UserManager<MongoUser> _userManager;
 
         public PostsController(PostService postsService,
                                SubForumService subForumService,
                                ReplyService replyService,
+                               UpvoteService upvoteService,
                                UserManager<MongoUser> userManager)
         {
             _postsService = postsService;
             _subForumService = subForumService;
             _replyService = replyService;
+            _upvoteService = upvoteService;
             _userManager = userManager;
         }
 
@@ -57,12 +60,33 @@ namespace bluedit.Controllers
                         Tags = post.Tags,
                         Author = author.UserName,
                         Time = post.Time,
-                        Upvotes = post.Upvotes
+                        Upvotes = post.Upvotes,
+                        UserVote = await UserUpvote(post.Id)
                     }
                 );
             }
 
             return returnPosts;
+        }
+
+        private async Task<bool?> UserUpvote(string PostableId)
+        {
+            var UserClaim = HttpContext.User.FindFirstValue("username");
+
+            if(UserClaim == null) return null;
+
+            var currentUser = await _userManager.FindByNameAsync(
+                UserClaim
+            );
+
+            if(currentUser == null) return null;
+
+            var upvote = _upvoteService.GetByPostAndUser(currentUser.Id.ToString(), PostableId);
+
+            if(upvote == null) return null;
+
+            if(upvote.IsUpvote) return true;
+            else return false;
         }
         
         private async Task<List<ReplyViewModel>> ListReplies(List<string> replyIds)
@@ -83,7 +107,8 @@ namespace bluedit.Controllers
                         Content = reply.Content,
                         Replies = replies,
                         Time = reply.Time,
-                        Upvotes = reply.Upvotes
+                        Upvotes = reply.Upvotes,
+                        UserVote = await UserUpvote(reply.Id)
                     });
             }
 
@@ -124,7 +149,8 @@ namespace bluedit.Controllers
                 Content = post.Content,
                 Replies = replies,
                 Time = post.Time,
-                Upvotes = post.Upvotes
+                Upvotes = post.Upvotes,
+                UserVote = await UserUpvote(post.Id)
             };
 
             return posts;

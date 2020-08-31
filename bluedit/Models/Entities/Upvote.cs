@@ -7,12 +7,14 @@ namespace bluedit.Models.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string UserId;
+        public string Id {get; set;}
 
-        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string PostId;
+        public string UserId {get; set;}
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string PostId {get; set;}
         
-        public bool IsUpvote;
+        public bool IsUpvote {get; set;}
     }
 }

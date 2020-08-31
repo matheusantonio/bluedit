@@ -1,40 +1,63 @@
-<mat-card>
-    <mat-card-title-group>
+<mat-card class="post-card">
 
-        <mat-card-subtitle>Posted by {{ post.author }} at {{post.time}}</mat-card-subtitle>
-    
-        <mat-card-title class="title">
-            <span class="upvotes">
+    <span class="main-post">
 
+        <span class="upvotes">
+
+            <button mat-icon-button (click)="upvote(true)">
                 <mat-icon>
                     keyboard_arrow_up
                 </mat-icon>
-                
-                {{post.upvotes}}
+            </button>
+            
+            {{post.upvotes}}
 
+            <button mat-icon-button (click)="upvote(false)">
                 <mat-icon>
                     keyboard_arrow_down
                 </mat-icon>
-                
-            </span>
+            </button>
+            
+        </span>
 
-            <a routerLink="/b/post/{{post.id}}">
-                {{ post.title }}
-            </a>
+        <span class="post">
+            
+            <mat-card-title-group class="title">
 
-        </mat-card-title>
+                    <mat-card-subtitle>Posted by {{ post.author }} at {{post.time}}</mat-card-subtitle>
+            
+                    <mat-card-title>
+                    
+                        <a routerLink="/b/post/{{post.id}}">
+                            {{ post.title }}
+                        </a>
 
-    </mat-card-title-group>
+                    </mat-card-title>
 
-    <mat-card-content>{{ post.content }}</mat-card-content>
+            </mat-card-title-group>
 
-    <mat-card-footer class="footer">
-        <mat-chip 
-            color="primary"
-            *ngFor="let tag of post.tags"
-            >
-            {{tag}}
-        </mat-chip>
-    </mat-card-footer>
+            <mat-card-content class="content">
+                <p>
+                    {{ post.content }}
+                </p>
+            </mat-card-content>
+
+            <mat-card-footer class="footer">
+                <mat-chip 
+                    color="primary"
+                    *ngFor="let tag of post.tags"
+                    >
+                    {{tag}}
+                </mat-chip>
+            </mat-card-footer>
+
+        </span>
+
+    </span>
+
+    <app-new-reply [postId]="post.id" class="reply-container"></app-new-reply>
+
+    <app-reply *ngFor="let reply of post.replies" [reply]="reply" [postId]="post.id" class="reply-container"></app-reply>
+
 
 </mat-card>
