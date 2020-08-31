@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post.model';
 import { PostService } from '../../services/post.service'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-view',
@@ -14,8 +15,6 @@ export class PostViewComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,
               private postService : PostService) { }
-
-  
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id")

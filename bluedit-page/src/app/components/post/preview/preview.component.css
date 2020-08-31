@@ -1,0 +1,24 @@
+.preview {
+    margin: 10px 5px 0px 0px;
+}
+
+.upvotes {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-right: 10px;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.footer {
+    padding: 5px;
+    margin-left: 3px;
+}

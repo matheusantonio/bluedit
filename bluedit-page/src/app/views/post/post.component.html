@@ -1,1 +1,5 @@
 <app-post [post] = "post"></app-post>
+
+<app-new-reply [postId]="post.id"></app-new-reply>
+
+<app-reply *ngFor="let reply of post.replies"></app-reply>

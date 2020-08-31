@@ -28,7 +28,8 @@ import { ReplyComponent } from './components/post/reply/reply.component';
 import { PreviewComponent } from './components/post/preview/preview.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { CreateComponent } from './components/post/create/create.component'
+import { CreateComponent } from './components/post/create/create.component';
+import { NewReplyComponent } from './components/post/new-reply/new-reply.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CreateComponent } from './components/post/create/create.component'
     PostViewComponent,
     LoginComponent,
     RegisterComponent,
-    CreateComponent
+    CreateComponent,
+    NewReplyComponent
   ],
   imports: [
     BrowserModule,

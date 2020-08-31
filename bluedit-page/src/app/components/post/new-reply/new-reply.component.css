@@ -1,0 +1,14 @@
+.card {
+    margin-top: 15px;
+}
+
+.reply-form {
+    padding: 10px 0px 10px 10px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}

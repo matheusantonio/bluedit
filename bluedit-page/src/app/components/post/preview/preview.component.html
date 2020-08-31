@@ -1,7 +1,39 @@
-<mat-card>
-    <a routerLink="/b/post/{{post.id}}">
-        <mat-card-title>{{post.upvotes}} : {{ post.title }}</mat-card-title>
-    </a>
-    <mat-card-subtitle>{{ post.author }} : {{post.time}}</mat-card-subtitle>
-    <mat-card-footer> {{ post.tags }} </mat-card-footer>
+<mat-card class="preview">
+    
+    <mat-card-title-group>
+
+        <mat-card-subtitle>Posted by {{ post.author }} at {{post.time}}</mat-card-subtitle>
+    
+        <mat-card-title class="title">
+            <span class="upvotes">
+
+                <mat-icon>
+                    keyboard_arrow_up
+                </mat-icon>
+                
+                {{post.upvotes}}
+
+                <mat-icon>
+                    keyboard_arrow_down
+                </mat-icon>
+                
+            </span>
+
+            <a routerLink="/b/post/{{post.id}}">
+                {{ post.title }}
+            </a>
+
+        </mat-card-title>
+
+    </mat-card-title-group>
+
+    <mat-card-footer class="footer">
+        <mat-chip 
+            color="primary"
+            *ngFor="let tag of post.tags"
+            >
+            {{tag}}
+        </mat-chip>
+    </mat-card-footer>
+
 </mat-card>
