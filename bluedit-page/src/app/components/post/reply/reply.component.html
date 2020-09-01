@@ -5,7 +5,7 @@
         <mat-card-title>
             <span class="upvotes">
 
-                <button mat-icon-button>
+                <button mat-icon-button (click)="upvote(true)">
                     <mat-icon>
                         keyboard_arrow_up
                     </mat-icon>
@@ -13,7 +13,7 @@
                 
                 {{reply.upvotes}}
 
-                <button mat-icon-button>
+                <button mat-icon-button (click)="upvote(false)">
                     <mat-icon>
                         keyboard_arrow_down
                     </mat-icon>

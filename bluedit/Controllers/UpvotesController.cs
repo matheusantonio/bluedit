@@ -1,5 +1,6 @@
 using bluedit.Services;
 using bluedit.Models.Entities;
+using bluedit.Models.ViewModel.Upvotes;
 
 using AspNetCore.Identity.Mongo.Model;
 using Microsoft.AspNetCore.Identity;
@@ -8,10 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
 
 namespace bluedit.Controllers
 {
     [Route("bluedit/posts/[controller]")]
+    [ApiController]
     public class UpvotesController : ControllerBase
     {
 
@@ -33,16 +36,16 @@ namespace bluedit.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody]string postId, bool isUp, bool isReply)
+        public async Task<ActionResult<UpdateUpvotesViewModel>> Create([FromBody] CreateUpvoteViewModel createdUpvote)
         {
             Postable post;
 
-            if(isReply)
+            if(createdUpvote.isReply)
             {
-                post = _replyService.Get(postId);
+                post = _replyService.Get(createdUpvote.postId);
 
             } else {
-                post = _postService.Get(postId);
+                post = _postService.Get(createdUpvote.postId);
             }
 
             if(post == null) return BadRequest();
@@ -51,37 +54,46 @@ namespace bluedit.Controllers
                 HttpContext.User.FindFirstValue("username")
             );
 
-            var upvote = _upvoteService.GetByPostAndUser(user.Id.ToString(), postId);
+            var upvote = _upvoteService.GetByPostAndUser(user.Id.ToString(), createdUpvote.postId);
 
             int postUpvoteCountAdd = 0;
+
+            bool? upResult = createdUpvote.isUp;
 
             if(upvote == null)
             {
                 var newUpvote = new Upvote
                 {
                     UserId = user.Id.ToString(),
-                    PostId = postId,
-                    IsUpvote = isUp
+                    PostId = createdUpvote.postId,
+                    IsUpvote = createdUpvote.isUp
                 };
 
                 upvote = _upvoteService.Create(newUpvote);
 
-                postUpvoteCountAdd = isUp ? 1 : -1;
+                postUpvoteCountAdd = createdUpvote.isUp ? 1 : -1;
             }
-            else if(upvote != null && upvote.IsUpvote != isUp)
+            else if(upvote != null && upvote.IsUpvote != createdUpvote.isUp)
             {
-                upvote.IsUpvote = isUp;
+                upvote.IsUpvote = createdUpvote.isUp;
 
                 _upvoteService.Update(upvote.Id, upvote);
 
-                postUpvoteCountAdd = isUp ? 1 : -1;
+                postUpvoteCountAdd = createdUpvote.isUp ? 2 : -2;
+            }
+            else if(upvote != null && upvote.IsUpvote == createdUpvote.isUp)
+            {
+                _upvoteService.Remove(upvote);
+                
+                postUpvoteCountAdd = createdUpvote.isUp ? -1 : 1;
+                upResult = null;
             }
 
             if(postUpvoteCountAdd != 0)
             {
                 post.Upvotes += postUpvoteCountAdd;
 
-                if(isReply)
+                if(createdUpvote.isReply)
                 {
                     _replyService.Update(post.Id, (Reply) post);
                 } else {
@@ -89,7 +101,11 @@ namespace bluedit.Controllers
                 }
             }
 
-            return Ok();
+            return Ok(new UpdateUpvotesViewModel
+                {
+                    UpdatedCount = post.Upvotes,
+                    IsUp = upResult
+                });
             
         }
 

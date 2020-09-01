@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PostPreview } from '../models/post.preview.model'
 import { Post } from '../models/post.model'
 import { SubForum } from '../models/subforum.model';
+import { UpdatedUpvotes } from '../models/upvotes.model'
 import { AuthService } from './auth.service';
 import { Reply } from '../models/reply.model';
 
@@ -68,11 +69,11 @@ export class PostService {
 
   }
 
-  upvote(postId : string, isUp : boolean, isReply : boolean = false) : Observable<any> {
+  upvote(postId : string, isUp : boolean, isReply : boolean = false) : Observable<UpdatedUpvotes> {
 
     const url = this.baseUrl + '/posts/upvotes'
 
-    return this.http.post<any>(url, {
+    return this.http.post<UpdatedUpvotes>(url, {
       postId : postId,
       isUp : isUp,
       isReply : isReply

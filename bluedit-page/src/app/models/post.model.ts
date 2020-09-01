@@ -10,7 +10,7 @@ export interface Post{
     replies : Reply[]
     time : Date
     upvotes : number
-    userUpvote : number
+    userUpvote : boolean
 }
 
 export interface CreatePost {

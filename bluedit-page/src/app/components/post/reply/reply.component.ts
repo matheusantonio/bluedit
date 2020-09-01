@@ -24,9 +24,9 @@ export class ReplyComponent implements OnInit {
 
   upvote(isUp : boolean)
   {
-    this.postService.upvote(this.postId, isUp, true).subscribe(() => {
-      if(isUp) this.reply.upvotes++
-      else this.reply.upvotes--
+    this.postService.upvote(this.postId, isUp, true).subscribe(response => {
+      this.reply.upvotes = response.updatedCount
+      this.reply.userUpvote = response.isUp
     }, error => {
       console.log(error)
     })

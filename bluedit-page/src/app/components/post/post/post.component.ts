@@ -19,9 +19,10 @@ export class PostComponent implements OnInit {
 
   upvote(isUp : boolean)
   {
-    this.postService.upvote(this.post.id, isUp, true).subscribe(() => {
-      if(isUp) this.post.upvotes++
-      else this.post.upvotes--
+    this.postService.upvote(this.post.id, isUp).subscribe(response => {
+      this.post.upvotes = response.updatedCount
+      this.post.userUpvote = response.isUp
+      console.log(this.post)
     }, error => {
       console.log(error)
     })
