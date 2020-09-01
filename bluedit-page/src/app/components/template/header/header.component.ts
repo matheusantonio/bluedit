@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service'
+import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,8 +12,11 @@ import { AuthService } from '../../../services/auth.service'
 export class HeaderComponent implements OnInit {
 
   currentUser : string
+  currentForum : string
+  currentForumIcon : string
 
-  constructor(private authService : AuthService) {
+  constructor(private authService : AuthService,
+              private router : Router) {
     
   }
 
@@ -20,22 +25,21 @@ export class HeaderComponent implements OnInit {
     this.checkCurrentUser()
 
     this.authService.loged$.subscribe(loged => {
-      if(loged && this.currentUser == null){
-        console.log("Usuário logado")
-        this.checkCurrentUser()
-      } else {
-        console.log("Usuário deslogado")
-        this.currentUser=null
-      }
+      if(loged &&  this.currentUser==null) this.checkCurrentUser()
+      else if(!loged) this.currentUser = null
     })
+  }
+
+  toRoute(route : string) {
+    this.router.navigate([route])
   }
 
   checkCurrentUser() {
     this.authService.currentUser().subscribe(response => {
+      this.authService.loged$.next(true)
       this.currentUser = response.userName
     }, error => {
       this.authService.loged$.next(false)
-      console.log(error)
     })
   }
 

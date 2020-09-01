@@ -59,8 +59,10 @@ export class CreateComponent implements OnInit {
       this.router.navigate(['b/post/' + response.id])
 
     }, error => {
-      console.log(error)
-      this.messageService.showMessage(error.message)
+      if(error.status == 401) {
+        this.messageService.showMessage("Sua sessão expirou, autentique-se para continuar.")
+        this.authService.loged$.next(false)
+      }
     })
   }
 

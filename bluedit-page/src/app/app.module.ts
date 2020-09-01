@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/post/post/post.component'
@@ -63,7 +64,8 @@ import { NewReplyComponent } from './components/post/new-reply/new-reply.compone
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

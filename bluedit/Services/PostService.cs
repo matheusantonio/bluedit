@@ -27,7 +27,7 @@ namespace bluedit.Services
             _posts.Find<Post>(post => post.Id == id).FirstOrDefault();
 
         public List<Post> GetBySubForum(string subForumId) =>
-            _posts.Find<Post>(post => post.SubForumId == subForumId).ToList();
+            _posts.Find<Post>(post => post.SubForumId == subForumId).SortByDescending(post => post.Time).ToList();
 
         public IEnumerable<string> GetTopSubForums() =>
              _posts.Aggregate()

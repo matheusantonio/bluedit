@@ -4,6 +4,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { ThrowStmt } from '@angular/compiler';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-new-reply',
@@ -20,6 +21,7 @@ export class NewReplyComponent implements OnInit {
 
   constructor(private authService : AuthService,
               private postService : PostService,
+              private messageService : MessageService,
               private router : Router) { }
 
   ngOnInit(): void {
@@ -48,7 +50,10 @@ export class NewReplyComponent implements OnInit {
       
 
     }, error => {
-      console.log(error)
+      if(error.status == 401) {
+        this.messageService.showMessage("Sua sessão expirou, autentique-se para continuar.")
+        this.authService.loged$.next(false)
+      }
     })
   }
 

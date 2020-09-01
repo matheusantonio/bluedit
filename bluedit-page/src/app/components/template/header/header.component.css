@@ -8,13 +8,25 @@
     align-items: center;
     text-decoration: none;
     color: #fff;
-
 }
 
 .header .subselector {
     margin-left: 20px;
 }
 
-.header .subselector i {
-    padding-right: 10px;
+.user {
+    margin-left: auto;
+}
+
+.user-actions{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-text {
+    margin-left: 15px;
+}
+
+.logout:hover {
+    cursor: pointer;
 }
