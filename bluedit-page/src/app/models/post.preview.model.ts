@@ -5,5 +5,5 @@ export interface PostPreview{
     author : string
     time : Date
     upvotes : number
-    userUpvote : boolean
+    userVote : boolean
 }

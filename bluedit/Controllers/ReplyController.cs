@@ -64,7 +64,7 @@ namespace bluedit.Controllers
                 Content = newReplyViewModel.Content,
                 Replies = new List<string>(),
                 Time = DateTime.Now,
-                Upvotes = 1
+                Upvotes = 0
             };
 
             var newReply = _replyService.Create(reply);

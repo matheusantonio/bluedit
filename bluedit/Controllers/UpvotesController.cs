@@ -35,6 +35,24 @@ namespace bluedit.Controllers
         }
 
         [Authorize]
+        [HttpGet("{id:length(24)}")]
+        public async Task<bool?> Get(string id)
+        {            
+            var currentUser = await _userManager.FindByNameAsync(
+                HttpContext.User.FindFirstValue("username")
+            );
+
+            if(currentUser == null) return null;
+
+            var upvote = _upvoteService.GetByPostAndUser(currentUser.Id.ToString(), id);
+
+            if(upvote == null) return null;
+
+            if(upvote.IsUpvote) return true;
+            else return false;
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<UpdateUpvotesViewModel>> Create([FromBody] CreateUpvoteViewModel createdUpvote)
         {
@@ -108,7 +126,6 @@ namespace bluedit.Controllers
                 });
             
         }
-
 
     }
 }

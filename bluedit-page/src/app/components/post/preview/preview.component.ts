@@ -14,13 +14,18 @@ export class PreviewComponent implements OnInit {
   constructor(private postService : PostService) { }
 
   ngOnInit(): void {
+    this.postService.userUpvote(this.post.id).subscribe(userVote => {
+      this.post.userVote = userVote
+    }, error => {
+      console.log(error)
+    })
   }
 
   upvote(isUp : boolean)
   {
     this.postService.upvote(this.post.id, isUp).subscribe(response => {
       this.post.upvotes = response.updatedCount
-      this.post.userUpvote = response.isUp
+      this.post.userVote = response.isUp
     }, error => {
       console.log(error)
     })

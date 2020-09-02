@@ -86,6 +86,13 @@ export class PostService {
 
   }
 
+  userUpvote(postId : string) : Observable<boolean> {
+
+    const url = this.baseUrl + '/posts/upvotes/' + postId
+
+    return this.http.get<boolean>(url, this.authService.getAuthorizationHeader())
+  }
+
   upvote(postId : string, isUp : boolean, isReply : boolean = false) : Observable<UpdatedUpvotes> {
 
     const url = this.baseUrl + '/posts/upvotes'

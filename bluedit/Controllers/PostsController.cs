@@ -60,8 +60,7 @@ namespace bluedit.Controllers
                         Tags = post.Tags,
                         Author = author.UserName,
                         Time = post.Time,
-                        Upvotes = post.Upvotes,
-                        UserVote = await UserUpvote(post.Id)
+                        Upvotes = post.Upvotes
                     }
                 );
             }
@@ -69,26 +68,6 @@ namespace bluedit.Controllers
             return returnPosts;
         }
 
-        private async Task<bool?> UserUpvote(string PostableId)
-        {
-            var UserClaim = HttpContext.User.FindFirstValue("username");
-
-            if(UserClaim == null) return null;
-
-            var currentUser = await _userManager.FindByNameAsync(
-                UserClaim
-            );
-
-            if(currentUser == null) return null;
-
-            var upvote = _upvoteService.GetByPostAndUser(currentUser.Id.ToString(), PostableId);
-
-            if(upvote == null) return null;
-
-            if(upvote.IsUpvote) return true;
-            else return false;
-        }
-        
         private async Task<List<ReplyViewModel>> ListReplies(List<string> replyIds)
         {
             var viewReplies = new List<ReplyViewModel>();
@@ -107,8 +86,7 @@ namespace bluedit.Controllers
                         Content = reply.Content,
                         Replies = replies,
                         Time = reply.Time,
-                        Upvotes = reply.Upvotes,
-                        UserVote = await UserUpvote(reply.Id)
+                        Upvotes = reply.Upvotes
                     });
             }
 
@@ -149,8 +127,7 @@ namespace bluedit.Controllers
                 Content = post.Content,
                 Replies = replies,
                 Time = post.Time,
-                Upvotes = post.Upvotes,
-                UserVote = await UserUpvote(post.Id)
+                Upvotes = post.Upvotes
             };
 
             return posts;

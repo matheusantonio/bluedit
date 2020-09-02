@@ -6,7 +6,7 @@
             <span class="upvotes">
 
                 <button mat-icon-button (click)="upvote(true)">
-                    <mat-icon [color]="reply.userUpvote && reply.userUpvote != null ? 'warn' : ''">
+                    <mat-icon [color]="reply.userVote && reply.userVote != null ? 'warn' : ''">
                         keyboard_arrow_up
                     </mat-icon>
                 </button>
@@ -14,7 +14,7 @@
                 {{reply.upvotes}}
 
                 <button mat-icon-button (click)="upvote(false)">
-                    <mat-icon [color]="!reply.userUpvote && reply.userUpvote != null ? 'warn' : ''">
+                    <mat-icon [color]="!reply.userVote && reply.userVote != null ? 'warn' : ''">
                         keyboard_arrow_down
                     </mat-icon>
                 </button>

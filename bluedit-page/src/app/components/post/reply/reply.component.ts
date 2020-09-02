@@ -16,6 +16,11 @@ export class ReplyComponent implements OnInit {
   constructor(private postService : PostService) { }
 
   ngOnInit(): void {
+    this.postService.userUpvote(this.reply.id).subscribe(userVote => {
+      this.reply.userVote = userVote
+    }, error => {
+      console.log(error)
+    })
   }
 
   toggleReplyForm() {
@@ -26,7 +31,7 @@ export class ReplyComponent implements OnInit {
   {
     this.postService.upvote(this.reply.id, isUp, true).subscribe(response => {
       this.reply.upvotes = response.updatedCount
-      this.reply.userUpvote = response.isUp
+      this.reply.userVote = response.isUp
     }, error => {
       console.log(error)
     })

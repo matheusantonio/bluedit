@@ -20,6 +20,11 @@ export class PostViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id")
     this.postService.postById(id).subscribe(post => {
       this.post = post
+      this.postService.userUpvote(this.post.id).subscribe(userVote => {
+        this.post.userVote = userVote
+      }, error => {
+        console.log(error)
+      })
     })
   }
 

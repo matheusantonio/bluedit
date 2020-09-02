@@ -14,15 +14,13 @@ export class PostComponent implements OnInit {
   constructor(private postService : PostService) { }
 
   ngOnInit(): void {
-    
   }
 
   upvote(isUp : boolean)
   {
     this.postService.upvote(this.post.id, isUp).subscribe(response => {
       this.post.upvotes = response.updatedCount
-      this.post.userUpvote = response.isUp
-      console.log(this.post)
+      this.post.userVote = response.isUp
     }, error => {
       console.log(error)
     })
