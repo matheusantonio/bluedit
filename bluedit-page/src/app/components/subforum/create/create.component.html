@@ -1,0 +1,18 @@
+<mat-card>
+
+    <mat-card-title>New Subforum</mat-card-title>
+
+    <form (ngSubmit)="createSubforum()" class="create-form">
+        <mat-form-field>
+            <input matInput placeholder="Name" [(ngModel)]="subforumName" name="subforumName">
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput rows="4" placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary">Create</button>
+
+    </form>
+
+</mat-card>

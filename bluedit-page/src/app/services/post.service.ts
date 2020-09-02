@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { PostPreview } from '../models/post.preview.model'
 import { Post } from '../models/post.model'
-import { SubForum } from '../models/subforum.model';
+import { SubForum, SubforumInfo } from '../models/subforum.model';
 import { UpdatedUpvotes } from '../models/upvotes.model'
 import { AuthService } from './auth.service';
 import { Reply } from '../models/reply.model';
@@ -14,6 +14,8 @@ import { Reply } from '../models/reply.model';
 export class PostService {
 
   baseUrl = "https://localhost:5002/bluedit"
+
+  subforumCreated$ = new Subject<boolean>() 
 
   constructor(private http: HttpClient,
               private authService : AuthService) { }
@@ -38,10 +40,25 @@ export class PostService {
     return this.http.get<Post>(url)
   }
 
+  allSubforums() : Observable<SubforumInfo[]> {
+    const url = this.baseUrl + '/subforum'
+
+    return this.http.get<SubforumInfo[]>(url)
+  }
+
   topSubForums() : Observable<string[]> {
     const url = this.baseUrl + '/subforum/top'
 
     return this.http.get<string[]>(url)
+  }
+
+  createSubforum(name : string, description : string) : Observable<SubforumInfo> {
+    const url = this.baseUrl + '/subforum'
+
+    return this.http.post<SubforumInfo>(url, {
+      name : name,
+      description : description
+    }, this.authService.getAuthorizationHeader())
   }
 
   createPost(title : string, content : string, tags : string[], subForum : string = null) : Observable<Post> {

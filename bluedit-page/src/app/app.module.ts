@@ -20,6 +20,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { SubComponent } from './views/sub/sub.component';
 import { PostComponent } from './components/post/post/post.component'
@@ -31,7 +32,9 @@ import { PreviewComponent } from './components/post/preview/preview.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { CreateComponent } from './components/post/create/create.component';
-import { NewReplyComponent } from './components/post/new-reply/new-reply.component'
+import { NewReplyComponent } from './components/post/new-reply/new-reply.component';
+import { NewSubComponent } from './views/sub/new-sub/new-sub.component'
+import { CreateSubforumComponent } from './components/subforum/create/create.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import { NewReplyComponent } from './components/post/new-reply/new-reply.compone
     LoginComponent,
     RegisterComponent,
     CreateComponent,
-    NewReplyComponent
+    NewReplyComponent,
+    NewSubComponent,
+    CreateSubforumComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,8 @@ import { NewReplyComponent } from './components/post/new-reply/new-reply.compone
     MatChipsModule,
     MatIconModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -186,7 +186,7 @@ namespace bluedit.Controllers
                 AuthorId = author.Id.ToString(),
                 SubForumId = subForumId,
                 Replies = new List<string>(),
-                Upvotes = 1,
+                Upvotes = 0,
                 Time = DateTime.Now
             };
 

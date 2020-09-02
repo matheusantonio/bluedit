@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service'
 import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
+import { SubforumInfo } from 'src/app/models/subforum.model';
+import { PostService } from 'src/app/services/post.service';
 
 
 @Component({
@@ -15,23 +17,44 @@ export class HeaderComponent implements OnInit {
   currentForum : string
   currentForumIcon : string
 
+  subforumList : SubforumInfo[]
+
   constructor(private authService : AuthService,
+              private postService : PostService,
               private router : Router) {
-    
+
   }
 
   ngOnInit(): void {
 
     this.checkCurrentUser()
 
+    this.checkSubforumList()
+
     this.authService.loged$.subscribe(loged => {
       if(loged &&  this.currentUser==null) this.checkCurrentUser()
       else if(!loged) this.currentUser = null
     })
+
+    this.postService.subforumCreated$.subscribe(() => {
+      this.checkSubforumList()
+    })
   }
 
   toRoute(route : string) {
-    this.router.navigate([route])
+    if(route == '') this.currentForum = 'home'
+    else this.currentForum=route
+
+    this.router.navigate(['']).then(() => {
+      this.router.navigate([route])
+    })
+    
+  }
+
+  checkSubforumList() {
+    this.postService.allSubforums().subscribe(subforumList => {
+      this.subforumList = subforumList
+    })
   }
 
   checkCurrentUser() {
@@ -46,5 +69,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout()
   }
+
 
 }

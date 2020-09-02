@@ -6,3 +6,9 @@ export interface SubForum {
     description : string
     posts : PostPreview[]
 }
+
+export interface SubforumInfo {
+    id : string
+    name: string
+    description : string
+}

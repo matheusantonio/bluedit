@@ -6,6 +6,7 @@ import { SubComponent } from './views/sub/sub.component'
 import { LoginViewComponent } from './views/login/login.component'
 import { RegisterViewComponent } from './views/register/register.component'
 import { PostViewComponent } from './views/post/post.component';
+import { NewSubComponent } from './views/sub/new-sub/new-sub.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: "b/post/:id",
     component: PostViewComponent
+  },
+  {
+    path: "b",
+    component: NewSubComponent
   },
   {
     path : "login",

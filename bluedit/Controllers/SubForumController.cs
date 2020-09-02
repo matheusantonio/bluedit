@@ -56,7 +56,7 @@ namespace bluedit.Controllers
         [HttpGet]
         public async Task<ActionResult<SubForumHomeViewModel>> GetByName([FromQuery]string name)
         {
-            if(name == null) return BadRequest();
+            if(name == null) return Ok(_subForumService.Get());
 
             var subForum = _subForumService.GetByName(name);
 
@@ -107,13 +107,17 @@ namespace bluedit.Controllers
         [HttpPost]
         public async Task<ActionResult<SubForum>> Create([FromBody] CreateSubForumViewModel createSubForum)
         {
+            var subForum = _subForumService.GetByName(createSubForum.Name);
+
+            if(subForum != null) return Conflict();
+
             var author = await _userManager.FindByNameAsync(
                 HttpContext.User.FindFirstValue("username"));
             
-            var subForum = new SubForum
+            subForum = new SubForum
             {
                 Name = createSubForum.Name,
-                Descrition = createSubForum.Descrition,
+                Descrition = createSubForum.Description,
                 creatorId = author.Id.ToString()
             };
 

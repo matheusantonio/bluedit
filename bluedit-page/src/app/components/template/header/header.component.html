@@ -9,7 +9,7 @@
 
         <mat-form-field class="subselector">
             
-            <mat-select value="home">
+            <mat-select [value]="currentForum">
                 
                     <mat-option value="home" (click)="toRoute('')">
                         
@@ -22,16 +22,15 @@
 
                 <mat-optgroup label="Subforums">
 
-                    <mat-option value="main" (click)="toRoute('b/main')">
-                        
+                    <mat-option *ngFor="let sub of subforumList" [value]="'b/'+sub.name" (click)="toRoute('b/'+sub.name)">
                         <mat-icon>
                             account_box
                         </mat-icon>
-                        b/main
-        
+                        b/{{sub.name}}
+
                     </mat-option>
 
-                    <mat-option>
+                    <mat-option (click)="toRoute('b')" value="b">
                         
                         <mat-icon>
                             add
